@@ -1,119 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tim Chong Realtor | Silicon Valley Real Estate Portal</title>
-  <style>
-    :root {
-      --bg-main: #050814;
-      --bg-elevated: #0f172a;
-      --bg-light: #0b1120;
-      --accent: #eab308;
-      --accent-soft: rgba(234, 179, 8, 0.16);
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.3);
-      --card-border: rgba(148, 163, 184, 0.35);
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.8);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --radius-pill: 999px;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: #000;
-      color: var(--text-main);
-      -webkit-font-smoothing: antialiased;
-      overflow: hidden;
-    }
-    .app-container { display: flex; flex-direction: column; height: 100vh; width: 100vw; }
-
-    /* Navigation */
-    .nav {
-      background: var(--bg-main);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 0.75rem 1.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
-    }
-    .logo { font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; text-decoration: none; font-size: 0.9rem; }
-    .logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 1rem; }
-    .nav-btn {
-      background: transparent; border: 1px solid var(--border-subtle);
-      color: var(--text-muted); padding: 0.5rem 1rem; border-radius: var(--radius-pill);
-      font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
-    }
-    .nav-btn:hover, .nav-btn.active { border-color: var(--accent); color: #fff; background: var(--accent-soft); }
-
-    /* Main Content */
-    .viewport { flex-grow: 1; position: relative; background: #fff; }
-    iframe { width: 100%; height: 100%; border: none; }
-    
-    .loading-overlay {
-      position: absolute; inset: 0; background: var(--bg-main);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      z-index: 10; transition: opacity 0.5s;
-    }
-    .spinner { width: 40px; height: 40px; border: 3px solid var(--accent-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Branding Footer */
-    .footer {
-      background: var(--bg-main); border-top: 1px solid var(--border-subtle);
-      padding: 0.5rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.7rem; color: var(--text-muted); flex-shrink: 0;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tim Chong Realtor | Silicon Valley Real Estate Portal</title>
+    <style>
+        :root {
+            --bg-main: #050814;
+            --bg-elevated: #0f172a;
+            --accent: #eab308;
+            --accent-soft: rgba(234, 179, 8, 0.16);
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --border-subtle: rgba(148, 163, 184, 0.3);
+            --radius-pill: 999px;
+        }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #000;
+            color: var(--text-main);
+            overflow: hidden;
+        }
+        .app-container { display: flex; flex-direction: column; height: 100vh; width: 100vw; }
+        .nav {
+            background: var(--bg-main);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0.75rem 1.5rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { font-weight: 700; color: #fff; text-decoration: none; font-size: 1.1rem; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 0.75rem; }
+        .nav-btn {
+            background: transparent; border: 1px solid var(--border-subtle);
+            color: var(--text-muted); padding: 0.5rem 1.25rem; border-radius: var(--radius-pill);
+            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+        }
+        .nav-btn:hover, .nav-btn.active { border-color: var(--accent); color: #fff; background: var(--accent-soft); }
+        .viewport { flex-grow: 1; position: relative; background: #fff; }
+        iframe { width: 100%; height: 100%; border: none; }
+        .loading-overlay {
+            position: absolute; inset: 0; background: var(--bg-main);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 10; transition: opacity 0.5s;
+        }
+        .spinner { width: 40px; height: 40px; border: 3px solid var(--accent-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .footer {
+            background: var(--bg-main); border-top: 1px solid var(--border-subtle);
+            padding: 0.6rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--text-muted);
+        }
+    </style>
 </head>
 <body>
-
 <div class="app-container">
-  <nav class="nav">
-    <a href="#" class="logo">Tim Chong <span>Realtor</span></a>
-    <div class="nav-links">
-      <button class="nav-btn active" onclick="loadPage('valuation', this)">Home Valuation</button>
-      <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
-      <button class="nav-btn" onclick="loadPage('insights', this)">Market Insights</button>
-    </div>
-  </nav>
-
-  <main class="viewport">
-    <div id="loader" class="loading-overlay">
-      <div class="spinner"></div>
-      <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted);">Syncing Real-Time MLS Data...</p>
-    </div>
-    <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports?auth_token=&utm_medium=email&utm_source=home-value-invite&utm_campaign=homebuyer" onload="hideLoader()"></iframe>
-  </main>
-
-  <footer class="footer">
-    <div>&copy; 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
-    <div style="opacity: 0.6;">Powered by RealScout, NAR RPR & MLSListings</div>
-  </footer>
+    <nav class="nav">
+        <a href="#" class="logo">TIM CHONG <span>REALTOR</span></a>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="loadPage('valuation', this)">Home Valuation</button>
+            <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
+            <button class="nav-btn" onclick="loadPage('insights', this)">Market Insights</button>
+        </div>
+    </nav>
+    <main class="viewport">
+        <div id="loader" class="loading-overlay">
+            <div class="spinner"></div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">Accessing Real-Time MLS Data...</p>
+        </div>
+        <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports" onload="hideLoader()"></iframe>
+    </main>
+    <footer class="footer">
+        <div>&copy; 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
+        <div style="opacity: 0.7;">Powered by RealScout & MLSListings</div>
+    </footer>
 </div>
-
 <script>
-  const pages = {
-    valuation: "https://timchong.realscout.com/homesearch/home-reports?auth_token=&utm_medium=email&utm_source=home-value-invite&utm_campaign=homebuyer",
-    search: "https://timchong.realscout.com",
-    insights: "https://www.mlslistings.com/market-reports" // Placeholder for Aculist
-  };
-
-  function loadPage(pageKey, btn) {
-    showLoader();
-    document.getElementById('main-frame').src = pages[pageKey];
-    
-    // Update UI
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-
-  function showLoader() { document.getElementById('loader').style.opacity = '1'; document.getElementById('loader').style.pointerEvents = 'all'; }
-  function hideLoader() { document.getElementById('loader').style.opacity = '0'; document.getElementById('loader').style.pointerEvents = 'none'; }
+    const pages = {
+        valuation: "https://timchong.realscout.com/homesearch/home-reports",
+        search: "https://timchong.realscout.com/homesearch/map",
+        insights: "https://www.mlslistings.com/browse-listings/santa-clara-county"
+    };
+    function loadPage(pageKey, btn) {
+        showLoader();
+        document.getElementById('main-frame').src = pages[pageKey];
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+    function showLoader() { document.getElementById('loader').style.opacity = '1'; document.getElementById('loader').style.pointerEvents = 'all'; }
+    function hideLoader() { document.getElementById('loader').style.opacity = '0'; document.getElementById('loader').style.pointerEvents = 'none'; }
 </script>
-
 </body>
 </html>
