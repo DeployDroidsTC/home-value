@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tim Chong Realtor | Silicon Valley Real Estate</title>
+  <title>Tim Chong Realtor | Silicon Valley Real Estate Portal</title>
   <style>
     :root {
       --bg-main: #050814;
@@ -24,150 +24,95 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #000 100%);
+      background: #000;
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-
-    /* Nav */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(5, 8, 20, 0.8); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 1rem 0;
-    }
-    .nav-content { display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; text-decoration: none; font-size: 1.1rem; }
-    .logo span { color: var(--accent); }
-    .nav-links { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-
-    /* Layout */
-    .page-header { padding-top: 8rem; padding-bottom: 3rem; text-align: center; }
-    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
-    .page-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-
-    /* Widget Frame */
-    .widget-container {
-      background: var(--bg-elevated);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--card-border);
-      box-shadow: var(--shadow-soft);
       overflow: hidden;
-      margin-bottom: 4rem;
-      position: relative;
     }
-    .widget-placeholder {
-      padding: 6rem 2rem;
-      text-align: center;
+    .app-container { display: flex; flex-direction: column; height: 100vh; width: 100vw; }
+
+    /* Navigation */
+    .nav {
+      background: var(--bg-main);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
     }
-    .widget-placeholder h2 { color: var(--accent); margin-bottom: 1rem; }
-    .widget-placeholder p { color: var(--text-muted); margin-bottom: 2rem; }
+    .logo { font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; text-decoration: none; font-size: 0.9rem; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1rem; }
+    .nav-btn {
+      background: transparent; border: 1px solid var(--border-subtle);
+      color: var(--text-muted); padding: 0.5rem 1rem; border-radius: var(--radius-pill);
+      font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
+    }
+    .nav-btn:hover, .nav-btn.active { border-color: var(--accent); color: #fff; background: var(--accent-soft); }
+
+    /* Main Content */
+    .viewport { flex-grow: 1; position: relative; background: #fff; }
+    iframe { width: 100%; height: 100%; border: none; }
     
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 0.8rem 2rem; border-radius: var(--radius-pill);
-      font-weight: 600; text-decoration: none; transition: all 0.2s ease;
-      cursor: pointer;
+    .loading-overlay {
+      position: absolute; inset: 0; background: var(--bg-main);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 10; transition: opacity 0.5s;
     }
-    .btn-primary { background: var(--accent); color: #000; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(234, 179, 8, 0.3); }
+    .spinner { width: 40px; height: 40px; border: 3px solid var(--accent-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Footer */
-    footer { padding: 4rem 0; border-top: 1px solid var(--border-subtle); text-align: center; font-size: 0.8rem; color: var(--text-muted); }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .page-header h1 { font-size: 2.2rem; }
+    /* Branding Footer */
+    .footer {
+      background: var(--bg-main); border-top: 1px solid var(--border-subtle);
+      padding: 0.5rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.7rem; color: var(--text-muted); flex-shrink: 0;
     }
   </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="container nav-content">
+<div class="app-container">
+  <nav class="nav">
     <a href="#" class="logo">Tim Chong <span>Realtor</span></a>
-    <ul class="nav-links">
-      <li><a href="#" class="active" onclick="showPage('valuation')">Home Value</a></li>
-      <li><a href="#" onclick="showPage('search')">MLS Search</a></li>
-      <li><a href="#" onclick="showPage('insights')">Market Insights</a></li>
-    </ul>
-  </div>
-</nav>
-
-<div id="valuation" class="page-section">
-  <header class="page-header container">
-    <h1>What's My Home Worth?</h1>
-    <p>Get a precise valuation powered by real-time NAR RPR and MLS data. Professional accuracy for Silicon Valley homeowners.</p>
-  </header>
-
-  <div class="container">
-    <div class="widget-container">
-      <div class="widget-placeholder">
-        <h2>NAR RPR AVM Integration Required</h2>
-        <p>To go live, please paste your <strong>RPR Lead Widget Code</strong> here.</p>
-        <a href="https://blog.narrpr.com/webinar-widget/" target="_blank" class="btn btn-primary">Find My RPR Code →</a>
-      </div>
-      <!-- RPR WIDGET CODE GOES HERE -->
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="loadPage('valuation', this)">Home Valuation</button>
+      <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
+      <button class="nav-btn" onclick="loadPage('insights', this)">Market Insights</button>
     </div>
-  </div>
-</div>
+  </nav>
 
-<div id="search" class="page-section" style="display: none;">
-  <header class="page-header container">
-    <h1>Search Active Listings</h1>
-    <p>Access the official MLS database directly. No delayed data, no ads—just every active home in the Peninsula and South Bay.</p>
-  </header>
-
-  <div class="container">
-    <div class="widget-container" style="min-height: 800px;">
-        <iframe id="mls-frame" src="about:blank" style="width: 100%; height: 800px; border: none;"></iframe>
+  <main class="viewport">
+    <div id="loader" class="loading-overlay">
+      <div class="spinner"></div>
+      <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted);">Syncing Real-Time MLS Data...</p>
     </div>
-  </div>
+    <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports?auth_token=&utm_medium=email&utm_source=home-value-invite&utm_campaign=homebuyer" onload="hideLoader()"></iframe>
+  </main>
+
+  <footer class="footer">
+    <div>&copy; 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
+    <div style="opacity: 0.6;">Powered by RealScout, NAR RPR & MLSListings</div>
+  </footer>
 </div>
-
-<div id="insights" class="page-section" style="display: none;">
-  <header class="page-header container">
-    <h1>Market Insights</h1>
-    <p>Live data trends for Los Gatos and the greater Silicon Valley area. Stay ahead of the market shifts.</p>
-  </header>
-
-  <div class="container">
-    <div class="widget-container" style="min-height: 500px;">
-        <div class="widget-placeholder">
-            <h2>Aculist Live Charts Integration</h2>
-            <p>Paste your <strong>Aculist Chart Embed Link</strong> here to show live median price trends.</p>
-        </div>
-    </div>
-  </div>
-</div>
-
-<footer class="container">
-  <p>&copy; 2026 Tim Chong Realtor | Keller Williams Peninsula Estates | DRE# 02244508</p>
-  <p style="margin-top: 1rem; opacity: 0.5;">Data provided by NAR RPR and MLSListings Inc.</p>
-</footer>
 
 <script>
-  function showPage(pageId) {
-    // Hide all sections
-    document.querySelectorAll('.page-section').forEach(s => s.style.display = 'none');
-    // Show target section
-    document.getElementById(pageId).style.display = 'block';
-    
-    // Update nav links
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    event.target.classList.add('active');
+  const pages = {
+    valuation: "https://timchong.realscout.com/homesearch/home-reports?auth_token=&utm_medium=email&utm_source=home-value-invite&utm_campaign=homebuyer",
+    search: "https://timchong.realscout.com",
+    insights: "https://www.mlslistings.com/market-reports" // Placeholder for Aculist
+  };
 
-    // If search page, load the Matrix iframe (Place placeholder URL here)
-    if(pageId === 'search') {
-        // You would paste your Matrix search tool URL here
-        // document.getElementById('mls-frame').src = 'YOUR_MATRIX_LINK';
-    }
+  function loadPage(pageKey, btn) {
+    showLoader();
+    document.getElementById('main-frame').src = pages[pageKey];
+    
+    // Update UI
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
   }
+
+  function showLoader() { document.getElementById('loader').style.opacity = '1'; document.getElementById('loader').style.pointerEvents = 'all'; }
+  function hideLoader() { document.getElementById('loader').style.opacity = '0'; document.getElementById('loader').style.pointerEvents = 'none'; }
 </script>
 
 </body>
