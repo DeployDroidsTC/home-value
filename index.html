@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What's My Home Worth? | Tim Chong Realtor</title>
+  <meta name="description" content="Get a free, instant home value estimate for your Peninsula or South Bay home. Tim Chong, Keller Williams Realtor." />
+  <style>
+    :root {
+      --bg-main: #050814;
+      --bg-elevated: #0f172a;
+      --bg-light: #0b1120;
+      --accent: #eab308;
+      --accent-soft: rgba(234, 179, 8, 0.16);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --card-border: rgba(148, 163, 184, 0.35);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.8);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      padding: 4rem 0;
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%);
+      overflow: hidden;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.18), transparent 55%),
+        radial-gradient(circle at 85% 10%, rgba(234, 179, 8, 0.25), transparent 50%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-text h1 { font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1.1; margin: 0 0 1.5rem; }
+    .subtitle { font-size: 1.1rem; color: var(--text-muted); max-width: 32rem; margin-bottom: 2rem; line-height: 1.6; }
+    
+    .form-card {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-soft);
+    }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.6rem; font-weight: 600; }
+    .form-group input {
+      width: 100%; padding: 0.9rem 1.2rem; border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(2, 6, 23, 0.6); color: var(--text-main);
+      font-size: 1rem; outline: none; transition: all 0.2s ease;
+    }
+    .form-group input:focus { border-color: var(--accent); background: rgba(2, 6, 23, 0.8); }
+    
+    .btn-submit {
+      width: 100%; padding: 1rem; border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, #facc15, #f97316);
+      color: #0b1120; font-weight: 600; font-size: 1rem;
+      border: none; cursor: pointer; transition: all 0.2s ease;
+      box-shadow: 0 10px 20px rgba(250, 204, 21, 0.2);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(250, 204, 21, 0.3); }
+
+    .branding { position: absolute; top: 2rem; left: 0; right: 0; z-index: 10; }
+    .logo { font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 1.1rem; color: #fff; text-decoration: none; }
+    .logo span { color: var(--accent); }
+
+    @media (max-width: 968px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+      .hero-text h1 { font-size: 2.8rem; }
+      .subtitle { margin: 0 auto 2rem; }
+      .form-card { max-width: 480px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="branding">
+  <div class="container">
+    <a href="#" class="logo">Tim Chong <span>Realtor</span></a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="hero-text">
+      <h1>What is Your Silicon Valley Home Worth?</h1>
+      <p class="subtitle">
+        Get a precise, data-driven valuation of your property in today's shifting market. No automated guesses—just real local expertise.
+      </p>
+      <div style="display: flex; gap: 2rem; justify-content: flex-start;">
+        <div>
+          <div style="color: var(--accent); font-weight: 700; font-size: 1.5rem;">$2.4M+</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Median Sale Price</div>
+        </div>
+        <div>
+          <div style="color: var(--accent); font-weight: 700; font-size: 1.5rem;">14 Days</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Avg. Time on Market</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-card" id="get-value">
+      <form action="https://timchong.realscout.com/homesearch/home-reports" method="GET">
+        <div class="form-group">
+          <label>Property Address</label>
+          <input type="text" name="address" placeholder="Enter your full address..." required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="Where should we send the report?" required>
+        </div>
+        <button type="submit" class="btn-submit">Get My Instant Estimate →</button>
+      </form>
+      <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 1.5rem; text-align: center;">
+        Powered by RealScout &amp; Keller Williams Peninsula Estates
+      </p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
