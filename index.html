@@ -22,108 +22,203 @@
             color: var(--text-main);
             overflow: hidden;
         }
-        .app-container { display: flex; flex-direction: column; height: 100vh; width: 100vw; }
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
         .nav {
             background: var(--bg-main);
             border-bottom: 1px solid var(--border-subtle);
             padding: 0.75rem 1.5rem;
-            display: flex; align-items: center; justify-content: space-between;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        .logo { font-weight: 700; color: #fff; text-decoration: none; font-size: 1.1rem; }
-        .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 0.75rem; }
+        .logo {
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .logo span {
+            color: var(--accent);
+        }
+        .nav-links {
+            display: flex;
+            gap: 0.75rem;
+        }
         .nav-btn {
-            background: transparent; border: 1px solid var(--border-subtle);
-            color: var(--text-muted); padding: 0.5rem 1.25rem; border-radius: var(--radius-pill);
-            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 0.5rem 1.25rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .nav-btn:hover, .nav-btn.active { border-color: var(--accent); color: #fff; background: var(--accent-soft); }
-        .viewport { flex-grow: 1; position: relative; background: #fff; }
-        iframe { width: 100%; height: 100%; border: none; }
+        .nav-btn:hover, .nav-btn.active {
+            border-color: var(--accent);
+            color: #fff;
+            background: var(--accent-soft);
+        }
+        .viewport {
+            flex-grow: 1;
+            position: relative;
+            background: #fff;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
         .insights-container {
-            position: absolute; inset: 0; background: var(--bg-elevated);
-            display: none; flex-direction: column; align-items: center;
-            padding: 2rem; overflow-y: auto; text-align: center;
+            position: absolute;
+            inset: 0;
+            background: var(--bg-elevated);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            overflow-y: auto;
+            text-align: center;
         }
         .altos-btn {
-            display: inline-block; background: var(--accent); color: #000;
-            padding: 1rem 2.5rem; border-radius: var(--radius-pill); font-weight: 700;
-            text-decoration: none; margin-top: 2rem; transition: transform 0.2s;
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: transform 0.2s;
         }
-        .altos-btn:hover { transform: scale(1.05); }
+        .altos-btn:hover {
+            transform: scale(1.05);
+        }
         .loading-overlay {
-            position: absolute; inset: 0; background: var(--bg-main);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 10; transition: opacity 0.5s;
+            position: absolute;
+            inset: 0;
+            background: var(--bg-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: opacity 0.5s;
         }
-        .spinner { width: 40px; height: 40px; border: 3px solid var(--accent-soft); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--accent-soft);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
         .footer {
-            background: var(--bg-main); border-top: 1px solid var(--border-subtle);
-            padding: 0.6rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
-            font-size: 0.75rem; color: var(--text-muted);
+            background: var(--bg-main);
+            border-top: 1px solid var(--border-subtle);
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
     </style>
-    <script>(function () { var bi = document.createElement('script'); bi.type = 'text/javascript';bi.async = true;bi.src = 'https://aculist-widget-assets-cdn.mlslmedia.com/aculist-embed-widgetdiv.js?v=3.2';var s = document.getElementsByTagName('body')[0];s.appendChild(bi);})();</script>
+    <script>
+        (function () {
+            var bi = document.createElement('script');
+            bi.type = 'text/javascript';
+            bi.async = true;
+            bi.src = 'https://aculist-widget-assets-cdn.mlslmedia.com/aculist-embed-widgetdiv.js?v=3.2';
+            var s = document.getElementsByTagName('body')[0];
+            s.appendChild(bi);
+        })();
+    </script>
 </head>
 <body>
-<div class="app-container">
-    <nav class="nav">
-        <a href="#" class="logo">TIM CHONG <span>REALTOR</span></a>
-        <div class="nav-links">
-            <button class="nav-btn active" onclick="loadPage('valuation', this)">Home Valuation</button>
-            <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
-            <button class="nav-btn" onclick="loadPage('insights', this)">Market Insights</button>
-        </div>
-    </nav>
-    <main class="viewport">
-        <div id="loader" class="loading-overlay">
-            <div class="spinner"></div>
-            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">Accessing Real-Time MLS Data...</p>
-        </div>
-        <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports" onload="hideLoader()"></iframe>
-        <div id="insights-view" class="insights-container">
-            <h2 style="color:var(--accent); margin-top: 0;">Market Trends & Insights</h2>
-            <p style="margin-bottom: 2rem;">Real-time Santa Clara County market data powered by MLSListings Aculist.</p>
-            <div style="width:100%; max-width: 850px; margin: 0 auto; background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                <div id='test' data-widgettype='trends' data-aculistwidget="" data-geographytype='City' data-geographyname='Palo Alto' data-county='Santa Clara' data-colors='#fdb921,#0033a0,#7ED321,#1DB2B8' data-period='10' data-periodtype='Year' data-tokenid='defaultmspvslp' data-classtype='Residential - Single Family,Residential - Common Interest' data-usertoken='1a799e0c-a141-4c94-a5fd-6c42feec0df902244508' data-title="true" ></div>
+    <div class="app-container">
+        <nav class="nav">
+            <a href="#" class="logo">TIM CHONG <span>REALTOR</span></a>
+            <div class="nav-links">
+                <button class="nav-btn active" onclick="loadPage('valuation', this)">Home Valuation</button>
+                <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
+                <button class="nav-btn" onclick="loadPage('insights', this)">Market Insights</button>
             </div>
-            <a href="https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202" target="_blank" class="altos-btn">Open Interactive Altos Research Report</a>
-            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
-                View the complete real-time market profile for any zip code in the Bay Area via our interactive Altos portal.
-            </p>
-        </div>
-    </main>
-    <footer class="footer">
-        <div>&copy; 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
-        <div style="opacity: 0.7;">Powered by Altos, RealScout & MLSListings</div>
-    </footer>
-</div>
-<script>
-    const pages = {
-        valuation: "https://timchong.realscout.com/homesearch/home-reports",
-        search: "https://timchong.realscout.com/homesearch/map"
-    };
-    function loadPage(pageKey, btn) {
-        const frame = document.getElementById('main-frame');
-        const insights = document.getElementById('insights-view');
-        
-        if (pageKey === 'insights') {
-            frame.style.display = 'none';
-            insights.style.display = 'flex';
-            hideLoader();
-        } else {
-            insights.style.display = 'none';
-            frame.style.display = 'block';
-            showLoader();
-            frame.src = pages[pageKey];
+        </nav>
+        <main class="viewport">
+            <div id="loader" class="loading-overlay">
+                <div class="spinner"></div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">Accessing Real-Time Data...</p>
+            </div>
+            <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports" onload="hideLoader()"></iframe>
+            
+            <div id="insights-view" class="insights-container">
+                <h2 style="color:var(--accent); margin-top: 0;">Market Trends & Insights</h2>
+                <p style="margin-bottom: 2rem;">Real-time Santa Clara County market data powered by MLSListings Aculist & Altos Research.</p>
+                
+                <div style="width:100%; max-width: 850px; margin: 0 auto; background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    <!-- Aculist Widget -->
+                    <div id='test' data-widgettype='trends' data-aculistwidget="" data-geographytype='City' data-geographyname='Palo Alto' data-county='Santa Clara' data-colors='#fdb921,#0033a0,#7ED321,#1DB2B8' data-period='10' data-periodtype='Year' data-tokenid='defaultmspvslp' data-classtype='Residential - Single Family,Residential - Common Interest' data-usertoken='1a799e0c-a141-4c94-a5fd-6c42feec0df902244508' data-title="true"></div>
+                    
+                    <p style="color: #64748b; font-size: 0.8rem; margin-top: 1rem;">If the chart above doesn't load, please use the button below for the interactive report.</p>
+                </div>
+                
+                <a href="https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202" target="_blank" class="altos-btn">Open Interactive Altos Research Report</a>
+                
+                <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    View the complete real-time market profile for any zip code in the Bay Area via our interactive Altos portal.
+                </p>
+            </div>
+        </main>
+        <footer class="footer">
+            <div>© 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
+            <div style="opacity: 0.7;">Powered by Altos, RealScout & MLSListings</div>
+        </footer>
+    </div>
+
+    <script>
+        const pages = {
+            valuation: "https://timchong.realscout.com/homesearch/home-reports",
+            search: "https://timchong.realscout.com/homesearch/map"
+        };
+
+        function loadPage(page, btn) {
+            const frame = document.getElementById('main-frame');
+            const insights = document.getElementById('insights-view');
+            const loader = document.getElementById('loader');
+
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (page === 'insights') {
+                frame.style.display = 'none';
+                insights.style.display = 'flex';
+                loader.style.display = 'none';
+            } else {
+                insights.style.display = 'none';
+                frame.style.display = 'block';
+                loader.style.display = 'flex';
+                frame.src = pages[page];
+            }
         }
-        
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    }
-    function showLoader() { document.getElementById('loader').style.opacity = '1'; document.getElementById('loader').style.pointerEvents = 'all'; }
-    function hideLoader() { document.getElementById('loader').style.opacity = '0'; document.getElementById('loader').style.pointerEvents = 'none'; }
-</script>
+
+        function hideLoader() {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                loader.style.opacity = '1';
+            }, 500);
+        }
+    </script>
 </body>
 </html>
