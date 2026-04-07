@@ -6,263 +6,403 @@
     <title>Tim Chong Realtor | Silicon Valley Real Estate Portal</title>
     <style>
     :root {
-        --bg-main: #050814;
+        --bg-main: #020617;
         --bg-elevated: #0f172a;
-        --accent: #eab308;
-        --accent-soft: rgba(234, 179, 8, 0.16);
-        --text-main: #f9fafb;
-        --text-muted: #9ca3af;
-        --border-subtle: rgba(148, 163, 184, 0.3);
-        --radius-pill: 999px;
-        --radius-card: 16px;
+        --accent: #f59e0b;
+        --accent-glow: rgba(245, 158, 11, 0.4);
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --border-glass: rgba(255, 255, 255, 0.1);
+        --glass: rgba(15, 23, 42, 0.8);
     }
+
+    * { box-sizing: border-box; }
+
     body {
         margin: 0;
-        font-family: system-ui, -apple-system, sans-serif;
-        background: #000;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background: var(--bg-main);
         color: var(--text-main);
         overflow: hidden;
+        height: 100vh;
     }
+
     .app-container {
         display: flex;
         flex-direction: column;
         height: 100vh;
         width: 100vw;
+        position: relative;
     }
+
+    /* Modern Glass Nav */
     .nav {
-        background: var(--bg-main);
-        border-bottom: 1px solid var(--border-subtle);
-        padding: 0.75rem 1.5rem;
+        background: rgba(2, 6, 23, 0.8);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-glass);
+        padding: 0.75rem 2rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        z-index: 100;
     }
+
     .logo {
-        font-weight: 700;
+        font-weight: 800;
+        letter-spacing: -0.025em;
         color: #fff;
         text-decoration: none;
-        font-size: 1.1rem;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
+
     .logo span {
         color: var(--accent);
+        background: linear-gradient(to right, #f59e0b, #fbbf24);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
+
     .nav-links {
         display: flex;
-        gap: 0.75rem;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.25rem;
+        border-radius: 9999px;
+        border: 1px solid var(--border-glass);
     }
+
     .nav-btn {
         background: transparent;
-        border: 1px solid var(--border-subtle);
+        border: none;
         color: var(--text-muted);
         padding: 0.5rem 1.25rem;
-        border-radius: var(--radius-pill);
-        font-size: 0.85rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         text-decoration: none;
         display: inline-flex;
         align-items: center;
     }
-    .nav-btn:hover, .nav-btn.active {
-        border-color: var(--accent);
+
+    .nav-btn:hover {
         color: #fff;
-        background: var(--accent-soft);
     }
+
+    .nav-btn.active {
+        background: var(--accent);
+        color: #000;
+        box-shadow: 0 0 20px var(--accent-glow);
+    }
+
     .viewport {
         flex-grow: 1;
         position: relative;
-        background: #fff;
-        overflow-y: auto;
+        background: #000;
     }
-    iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        display: block;
-    }
-    .hidden {
-        display: none !important;
-    }
-    .loading-overlay {
+
+    /* Hero Redesign */
+    .hero-view {
         position: absolute;
         inset: 0;
-        background: var(--bg-main);
+        background: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.9)), 
+                    url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000');
+        background-size: cover;
+        background-position: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        text-align: center;
+        padding: 2rem;
         z-index: 10;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.05em;
+    }
+
+    .hero-content p {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        margin-bottom: 3rem;
+        max-width: 600px;
+        margin-inline: auto;
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 900px;
+    }
+
+    .hero-card {
+        background: var(--glass);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border-glass);
+        padding: 2rem;
+        border-radius: 24px;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: left;
+    }
+
+    .hero-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--accent);
+        background: rgba(15, 23, 42, 0.9);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .hero-card h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.125rem;
+        color: var(--accent);
+    }
+
+    .hero-card p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        opacity: 0;
         transition: opacity 0.5s;
     }
+
+    iframe.loaded {
+        opacity: 1;
+    }
+
+    .loader {
+        position: absolute;
+        inset: 0;
+        background: var(--bg-main);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+    }
+
     .spinner {
-        width: 40px;
-        height: 40px;
-        border: 3px solid var(--accent-soft);
+        width: 48px;
+        height: 48px;
+        border: 4px solid var(--accent-glow);
         border-top-color: var(--accent);
         border-radius: 50%;
         animation: spin 1s linear infinite;
     }
-    @keyframes spin {
-        to { transform: rotate(360deg); }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
     }
-    .dashboard-view {
-        padding: 3rem 1.5rem;
-        background: var(--bg-elevated);
-        min-height: 100%;
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .dashboard-header {
-        text-align: center;
-        margin-bottom: 3rem;
-    }
-    .dashboard-header h1 {
-        color: var(--accent);
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-    }
-    .actions-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-        max-width: 1000px;
-        width: 100%;
-    }
-    .action-card {
-        background: var(--bg-main);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-card);
-        padding: 2rem;
-        text-align: center;
-        transition: transform 0.3s, border-color 0.3s;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    .action-card:hover {
-        transform: translateY(-5px);
-        border-color: var(--accent);
-    }
-    .action-card h3 {
-        margin-top: 0;
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
-    }
-    .action-card p {
-        color: var(--text-muted);
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
-        line-height: 1.5;
-    }
-    .action-btn {
-        background: var(--accent);
-        color: #000;
-        border: none;
-        padding: 0.75rem 1rem;
-        border-radius: var(--radius-pill);
-        font-weight: 600;
-        cursor: pointer;
-        text-decoration: none;
-        transition: opacity 0.2s;
-    }
-    .action-btn:hover {
-        opacity: 0.9;
-    }
+
     .footer {
         background: var(--bg-main);
-        border-top: 1px solid var(--border-subtle);
-        padding: 0.6rem 1.5rem;
+        border-top: 1px solid var(--border-glass);
+        padding: 1rem 2rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 0.75rem;
         color: var(--text-muted);
+        z-index: 100;
     }
+
+    .hidden { display: none !important; }
+    .slide-up { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+    /* Client Actions Dashboard */
+    .dashboard {
+        position: absolute;
+        inset: 0;
+        padding: 4rem 2rem;
+        background: var(--bg-elevated);
+        overflow-y: auto;
+        z-index: 5;
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .action-card {
+        background: var(--bg-main);
+        border: 1px solid var(--border-glass);
+        padding: 3rem 2rem;
+        border-radius: 32px;
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+    .action-card:hover {
+        border-color: var(--accent);
+        transform: scale(1.02);
+    }
+
+    .btn-primary {
+        background: var(--accent);
+        color: #000;
+        padding: 1rem 2rem;
+        border-radius: 9999px;
+        text-decoration: none;
+        font-weight: 700;
+        display: inline-block;
+        margin-top: 2rem;
+        transition: transform 0.2s;
+    }
+
+    .btn-primary:hover { transform: scale(1.05); }
+
     </style>
 </head>
 <body>
     <div class="app-container">
         <nav class="nav">
-            <a href="#" class="logo" onclick="loadPage('valuation', document.querySelector('.nav-btn'))">TIM CHONG <span>REALTOR</span></a>
+            <a href="#" class="logo" onclick="goHome()">TIM CHONG <span>REALTOR</span></a>
             <div class="nav-links">
-                <button class="nav-btn active" onclick="loadPage('valuation', this)">Home Valuation</button>
+                <button class="nav-btn" onclick="loadPage('valuation', this)">Valuation</button>
                 <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
-                <button class="nav-btn" onclick="loadPage('actions', this)">Client Actions</button>
-                <button class="nav-btn" onclick="loadPage('insights', this)">Market Insights</button>
+                <button class="nav-btn" onclick="loadPage('actions', this)">Client Portal</button>
+                <button class="nav-btn" onclick="openAltos()">Market Data</button>
             </div>
         </nav>
+
         <main class="viewport">
-            <div id="loader" class="loading-overlay">
-                <div class="spinner"></div>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">Accessing Real-Time Data...</p>
-            </div>
-            <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports" onload="hideLoader()"></iframe>
-            <div id="actions-view" class="dashboard-view hidden">
-                <div class="dashboard-header">
-                    <h1>Real Estate Action Center</h1>
-                    <p style="color: var(--text-muted);">Streamlined solutions for Silicon Valley buyers and sellers.</p>
+            <!-- Hero Landing -->
+            <div id="hero" class="hero-view">
+                <div class="hero-content">
+                    <h1>Silicon Valley <span>Real Estate</span> Redefined.</h1>
+                    <p>Access institutional-grade market data and premium property search tools in one seamless dashboard.</p>
+                    
+                    <div class="hero-grid">
+                        <div class="hero-card" onclick="loadPage('valuation', document.querySelectorAll('.nav-btn')[0])">
+                            <h3>Home Value</h3>
+                            <p>Get a precise AI-driven valuation of your property.</p>
+                        </div>
+                        <div class="hero-card" onclick="loadPage('search', document.querySelectorAll('.nav-btn')[1])">
+                            <h3>Pro Search</h3>
+                            <p>Direct MLS access with real-time inventory updates.</p>
+                        </div>
+                        <div class="hero-card" onclick="openAltos()">
+                            <h3>Market Insights</h3>
+                            <p>Live data tracking for Palo Alto & Silicon Valley.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="actions-grid">
+            </div>
+
+            <div id="loader" class="loader"><div class="spinner"></div></div>
+            
+            <iframe id="main-frame" src=""></iframe>
+
+            <div id="dashboard" class="dashboard hidden">
+                <div style="text-align:center; margin-bottom: 4rem;">
+                    <h2 style="font-size: 3rem; margin-bottom: 1rem;">Client Action Center</h2>
+                    <p style="color: var(--text-muted)">High-touch service for high-net-worth clients.</p>
+                </div>
+                <div class="dashboard-grid">
                     <div class="action-card">
-                        <h3>Make an Offer Now</h3>
-                        <p>Ready to secure your dream home? Submit a formal offer request directly to Tim Chong for immediate processing.</p>
-                        <a href="mailto:tim.chong@kw.com?subject=Offer Request" class="action-btn">Draft My Offer</a>
+                        <h2>Make an Offer</h2>
+                        <p>Submit a formal intent to purchase. Priority processing for Tim's clients.</p>
+                        <a href="mailto:tim.chong@kw.com?subject=Offer Request" class="btn-primary">Draft My Offer</a>
                     </div>
                     <div class="action-card">
-                        <h3>View a Home</h3>
-                        <p>Found a property you love? Schedule a private walkthrough or virtual tour at your convenience.</p>
-                        <a href="mailto:tim.chong@kw.com?subject=Schedule Viewing" class="action-btn">Schedule Tour</a>
+                        <h2>Private Tour</h2>
+                        <p>Schedule a walkthrough of any property in the Bay Area at your convenience.</p>
+                        <a href="mailto:tim.chong@kw.com?subject=Schedule Viewing" class="btn-primary">Book Tour</a>
                     </div>
                     <div class="action-card">
-                        <h3>Sell My Home Now</h3>
-                        <p>Thinking of moving? Get an expert market analysis and custom marketing strategy to sell for top dollar.</p>
-                        <a href="mailto:tim.chong@kw.com?subject=Selling Consultation" class="action-btn">Start Selling</a>
+                        <h2>List My Home</h2>
+                        <p>Get a custom marketing plan and white-glove concierge selling service.</p>
+                        <a href="mailto:tim.chong@kw.com?subject=Selling Consultation" class="btn-primary">Start Selling</a>
                     </div>
                 </div>
             </div>
         </main>
+
         <footer class="footer">
             <div>&copy; 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
-            <div style="opacity: 0.7;">Powered by Altos, RealScout &amp; MLSListings</div>
+            <div style="letter-spacing: 0.05em; font-weight: 600;">POWERED BY ALTOS & REALSCOUT</div>
         </footer>
     </div>
+
     <script>
     const pages = {
         valuation: "https://timchong.realscout.com/homesearch/home-reports",
         search: "https://timchong.realscout.com/homesearch/map"
     };
+
     function loadPage(page, btn) {
+        const hero = document.getElementById('hero');
         const frame = document.getElementById('main-frame');
-        const actionsView = document.getElementById('actions-view');
+        const dash = document.getElementById('dashboard');
         const loader = document.getElementById('loader');
 
-        if (page === 'insights') {
-            window.open('https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202', '_blank');
-            return;
-        }
-
+        // Nav UI
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        if(btn) btn.classList.add('active');
+
+        // Hide Hero
+        hero.classList.add('slide-up');
+
         if (page === 'actions') {
             frame.classList.add('hidden');
-            actionsView.classList.remove('hidden');
+            dash.classList.remove('hidden');
             loader.style.display = 'none';
         } else {
-            actionsView.classList.add('hidden');
+            dash.classList.add('hidden');
             frame.classList.remove('hidden');
+            frame.classList.remove('loaded');
             loader.style.display = 'flex';
-            loader.style.opacity = '1';
             frame.src = pages[page];
+            frame.onload = () => {
+                loader.style.display = 'none';
+                frame.classList.add('loaded');
+            };
         }
     }
-    function hideLoader() {
-        const loader = document.getElementById('loader');
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-        }, 500);
+
+    function goHome() {
+        const hero = document.getElementById('hero');
+        const frame = document.getElementById('main-frame');
+        const dash = document.getElementById('dashboard');
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        
+        hero.classList.remove('slide-up');
+        frame.classList.add('hidden');
+        dash.classList.add('hidden');
+    }
+
+    function openAltos() {
+        window.open('https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202', '_blank');
     }
     </script>
 </body>
