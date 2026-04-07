@@ -58,6 +58,9 @@
             font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
         }
         .nav-btn:hover, .nav-btn.active {
             border-color: var(--accent);
@@ -115,7 +118,7 @@
             <div class="nav-links">
                 <button class="nav-btn active" onclick="loadPage('valuation', this)">Home Valuation</button>
                 <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
-                <button class="nav-btn" onclick="loadPage('insights', this)">Market Insights</button>
+                <a href="https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202" class="nav-btn">Market Insights</a>
             </div>
         </nav>
         <main class="viewport">
@@ -130,30 +133,20 @@
             <div style="opacity: 0.7;">Powered by Altos, RealScout & MLSListings</div>
         </footer>
     </div>
-
     <script>
         const pages = {
             valuation: "https://timchong.realscout.com/homesearch/home-reports",
-            search: "https://timchong.realscout.com/homesearch/map",
-            insights: "https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202"
+            search: "https://timchong.realscout.com/homesearch/map"
         };
-
         function loadPage(page, btn) {
             const frame = document.getElementById('main-frame');
             const loader = document.getElementById('loader');
-
-            // Update nav buttons
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            // Show loader
             loader.style.display = 'flex';
             loader.style.opacity = '1';
-
-            // Load page in iframe
             frame.src = pages[page];
         }
-
         function hideLoader() {
             const loader = document.getElementById('loader');
             loader.style.opacity = '0';
