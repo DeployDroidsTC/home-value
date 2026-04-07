@@ -5,184 +5,182 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tim Chong Realtor | Silicon Valley Real Estate Portal</title>
     <style>
-        :root {
-            --bg-main: #050814;
-            --bg-elevated: #0f172a;
-            --accent: #eab308;
-            --accent-soft: rgba(234, 179, 8, 0.16);
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
-            --border-subtle: rgba(148, 163, 184, 0.3);
-            --radius-pill: 999px;
-            --radius-card: 16px;
-        }
-        body {
-            margin: 0;
-            font-family: system-ui, -apple-system, sans-serif;
-            background: #000;
-            color: var(--text-main);
-            overflow: hidden;
-        }
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            width: 100vw;
-        }
-        .nav {
-            background: var(--bg-main);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 0.75rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo {
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-        }
-        .logo span {
-            color: var(--accent);
-        }
-        .nav-links {
-            display: flex;
-            gap: 0.75rem;
-        }
-        .nav-btn {
-            background: transparent;
-            border: 1px solid var(--border-subtle);
-            color: var(--text-muted);
-            padding: 0.5rem 1.25rem;
-            border-radius: var(--radius-pill);
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-        }
-        .nav-btn:hover, .nav-btn.active {
-            border-color: var(--accent);
-            color: #fff;
-            background: var(--accent-soft);
-        }
-        .viewport {
-            flex-grow: 1;
-            position: relative;
-            background: #fff;
-            overflow-y: auto;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-        .hidden {
-            display: none !important;
-        }
-        .loading-overlay {
-            position: absolute;
-            inset: 0;
-            background: var(--bg-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: opacity 0.5s;
-        }
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--accent-soft);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Action Center Styles */
-        .dashboard-view {
-            padding: 3rem 1.5rem;
-            background: var(--bg-elevated);
-            min-height: 100%;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .dashboard-header h1 {
-            color: var(--accent);
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        .actions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 1000px;
-            width: 100%;
-        }
-        .action-card {
-            background: var(--bg-main);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-card);
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.3s, border-color 0.3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .action-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-        .action-card h3 {
-            margin-top: 0;
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-        }
-        .action-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-        .action-btn {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: var(--radius-pill);
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .action-btn:hover {
-            opacity: 0.9;
-        }
-
-        .footer {
-            background: var(--bg-main);
-            border-top: 1px solid var(--border-subtle);
-            padding: 0.6rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
+    :root {
+        --bg-main: #050814;
+        --bg-elevated: #0f172a;
+        --accent: #eab308;
+        --accent-soft: rgba(234, 179, 8, 0.16);
+        --text-main: #f9fafb;
+        --text-muted: #9ca3af;
+        --border-subtle: rgba(148, 163, 184, 0.3);
+        --radius-pill: 999px;
+        --radius-card: 16px;
+    }
+    body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #000;
+        color: var(--text-main);
+        overflow: hidden;
+    }
+    .app-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+    }
+    .nav {
+        background: var(--bg-main);
+        border-bottom: 1px solid var(--border-subtle);
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo {
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.1rem;
+    }
+    .logo span {
+        color: var(--accent);
+    }
+    .nav-links {
+        display: flex;
+        gap: 0.75rem;
+    }
+    .nav-btn {
+        background: transparent;
+        border: 1px solid var(--border-subtle);
+        color: var(--text-muted);
+        padding: 0.5rem 1.25rem;
+        border-radius: var(--radius-pill);
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+    .nav-btn:hover, .nav-btn.active {
+        border-color: var(--accent);
+        color: #fff;
+        background: var(--accent-soft);
+    }
+    .viewport {
+        flex-grow: 1;
+        position: relative;
+        background: #fff;
+        overflow-y: auto;
+    }
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+    }
+    .hidden {
+        display: none !important;
+    }
+    .loading-overlay {
+        position: absolute;
+        inset: 0;
+        background: var(--bg-main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: opacity 0.5s;
+    }
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--accent-soft);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    /* Action Center Styles */
+    .dashboard-view {
+        padding: 3rem 1.5rem;
+        background: var(--bg-elevated);
+        min-height: 100%;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    .dashboard-header h1 {
+        color: var(--accent);
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        max-width: 1000px;
+        width: 100%;
+    }
+    .action-card {
+        background: var(--bg-main);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-card);
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s, border-color 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .action-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+    }
+    .action-card h3 {
+        margin-top: 0;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    .action-card p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+    }
+    .action-btn {
+        background: var(--accent);
+        color: #000;
+        border: none;
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: opacity 0.2s;
+    }
+    .action-btn:hover {
+        opacity: 0.9;
+    }
+    .footer {
+        background: var(--bg-main);
+        border-top: 1px solid var(--border-subtle);
+        padding: 0.6rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
     </style>
 </head>
 <body>
@@ -193,7 +191,7 @@
                 <button class="nav-btn active" onclick="loadPage('valuation', this)">Home Valuation</button>
                 <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
                 <button class="nav-btn" onclick="loadPage('actions', this)">Client Actions</button>
-                <a href="https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202" class="nav-btn">Market Insights</a>
+                <button class="nav-btn" onclick="loadPage('insights', this)">Market Insights</button>
             </div>
         </nav>
         <main class="viewport">
@@ -201,9 +199,8 @@
                 <div class="spinner"></div>
                 <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">Accessing Real-Time Data...</p>
             </div>
-            
-            <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports" onload="hideLoader()"></iframe>
 
+            <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports" onload="hideLoader()"></iframe>
             <div id="actions-view" class="dashboard-view hidden">
                 <div class="dashboard-header">
                     <h1>Real Estate Action Center</h1>
@@ -229,42 +226,42 @@
             </div>
         </main>
         <footer class="footer">
-            <div>© 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
-            <div style="opacity: 0.7;">Powered by Altos, RealScout & MLSListings</div>
+            <div>&copy; 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
+            <div style="opacity: 0.7;">Powered by Altos, RealScout &amp; MLSListings</div>
         </footer>
     </div>
     <script>
-        const pages = {
-            valuation: "https://timchong.realscout.com/homesearch/home-reports",
-            search: "https://timchong.realscout.com/homesearch/map"
-        };
-        function loadPage(page, btn) {
-            const frame = document.getElementById('main-frame');
-            const actionsView = document.getElementById('actions-view');
-            const loader = document.getElementById('loader');
-            
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+    const pages = {
+        valuation: "https://timchong.realscout.com/homesearch/home-reports",
+        search: "https://timchong.realscout.com/homesearch/map",
+        insights: "https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202"
+    };
+    function loadPage(page, btn) {
+        const frame = document.getElementById('main-frame');
+        const actionsView = document.getElementById('actions-view');
+        const loader = document.getElementById('loader');
 
-            if (page === 'actions') {
-                frame.classList.add('hidden');
-                actionsView.classList.remove('hidden');
-                loader.style.display = 'none';
-            } else {
-                actionsView.classList.add('hidden');
-                frame.classList.remove('hidden');
-                loader.style.display = 'flex';
-                loader.style.opacity = '1';
-                frame.src = pages[page];
-            }
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (page === 'actions') {
+            frame.classList.add('hidden');
+            actionsView.classList.remove('hidden');
+            loader.style.display = 'none';
+        } else {
+            actionsView.classList.add('hidden');
+            frame.classList.remove('hidden');
+            loader.style.display = 'flex';
+            loader.style.opacity = '1';
+            frame.src = pages[page];
         }
-        function hideLoader() {
-            const loader = document.getElementById('loader');
-            loader.style.opacity = '0';
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 500);
-        }
+    }
+    function hideLoader() {
+        const loader = document.getElementById('loader');
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500);
+    }
     </script>
 </body>
 </html>
