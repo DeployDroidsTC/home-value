@@ -74,31 +74,6 @@
             height: 100%;
             border: none;
         }
-        .insights-container {
-            position: absolute;
-            inset: 0;
-            background: var(--bg-elevated);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            overflow-y: auto;
-            text-align: center;
-        }
-        .altos-btn {
-            display: inline-block;
-            background: var(--accent);
-            color: #000;
-            padding: 1rem 2.5rem;
-            border-radius: var(--radius-pill);
-            font-weight: 700;
-            text-decoration: none;
-            margin-top: 2rem;
-            transition: transform 0.2s;
-        }
-        .altos-btn:hover {
-            transform: scale(1.05);
-        }
         .loading-overlay {
             position: absolute;
             inset: 0;
@@ -132,16 +107,6 @@
             color: var(--text-muted);
         }
     </style>
-    <script>
-        (function () {
-            var bi = document.createElement('script');
-            bi.type = 'text/javascript';
-            bi.async = true;
-            bi.src = 'https://aculist-widget-assets-cdn.mlslmedia.com/aculist-embed-widgetdiv.js?v=3.2';
-            var s = document.getElementsByTagName('body')[0];
-            s.appendChild(bi);
-        })();
-    </script>
 </head>
 <body>
     <div class="app-container">
@@ -159,24 +124,6 @@
                 <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">Accessing Real-Time Data...</p>
             </div>
             <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports" onload="hideLoader()"></iframe>
-            
-            <div id="insights-view" class="insights-container">
-                <h2 style="color:var(--accent); margin-top: 0;">Market Trends & Insights</h2>
-                <p style="margin-bottom: 2rem;">Real-time Santa Clara County market data powered by MLSListings Aculist & Altos Research.</p>
-                
-                <div style="width:100%; max-width: 850px; margin: 0 auto; background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                    <!-- Aculist Widget -->
-                    <div id='test' data-widgettype='trends' data-aculistwidget="" data-geographytype='City' data-geographyname='Palo Alto' data-county='Santa Clara' data-colors='#fdb921,#0033a0,#7ED321,#1DB2B8' data-period='10' data-periodtype='Year' data-tokenid='defaultmspvslp' data-classtype='Residential - Single Family,Residential - Common Interest' data-usertoken='1a799e0c-a141-4c94-a5fd-6c42feec0df902244508' data-title="true"></div>
-                    
-                    <p style="color: #64748b; font-size: 0.8rem; margin-top: 1rem;">If the chart above doesn't load, please use the button below for the interactive report.</p>
-                </div>
-                
-                <a href="https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202" target="_blank" class="altos-btn">Open Interactive Altos Research Report</a>
-                
-                <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
-                    View the complete real-time market profile for any zip code in the Bay Area via our interactive Altos portal.
-                </p>
-            </div>
         </main>
         <footer class="footer">
             <div>© 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
@@ -187,28 +134,24 @@
     <script>
         const pages = {
             valuation: "https://timchong.realscout.com/homesearch/home-reports",
-            search: "https://timchong.realscout.com/homesearch/map"
+            search: "https://timchong.realscout.com/homesearch/map",
+            insights: "https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202"
         };
 
         function loadPage(page, btn) {
             const frame = document.getElementById('main-frame');
-            const insights = document.getElementById('insights-view');
             const loader = document.getElementById('loader');
 
             // Update nav buttons
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            if (page === 'insights') {
-                frame.style.display = 'none';
-                insights.style.display = 'flex';
-                loader.style.display = 'none';
-            } else {
-                insights.style.display = 'none';
-                frame.style.display = 'block';
-                loader.style.display = 'flex';
-                frame.src = pages[page];
-            }
+            // Show loader
+            loader.style.display = 'flex';
+            loader.style.opacity = '1';
+
+            // Load page in iframe
+            frame.src = pages[page];
         }
 
         function hideLoader() {
@@ -216,7 +159,6 @@
             loader.style.opacity = '0';
             setTimeout(() => {
                 loader.style.display = 'none';
-                loader.style.opacity = '1';
             }, 500);
         }
     </script>
