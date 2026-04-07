@@ -260,11 +260,21 @@
         border-radius: 32px;
         text-align: center;
         transition: all 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .action-card:hover {
         border-color: var(--accent);
         transform: scale(1.02);
+    }
+
+    .action-btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 2rem;
     }
 
     .btn-primary {
@@ -274,12 +284,30 @@
         border-radius: 9999px;
         text-decoration: none;
         font-weight: 700;
-        display: inline-block;
-        margin-top: 2rem;
-        transition: transform 0.2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: transform 0.2s, opacity 0.2s;
     }
 
-    .btn-primary:hover { transform: scale(1.05); }
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-glass);
+        color: #fff;
+        padding: 1rem 2rem;
+        border-radius: 9999px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: all 0.2s;
+    }
+
+    .btn-primary:hover, .btn-secondary:hover { transform: scale(1.03); opacity: 0.9; }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--accent); }
 
     </style>
 </head>
@@ -329,20 +357,38 @@
                     <p style="color: var(--text-muted)">High-touch service for high-net-worth clients.</p>
                 </div>
                 <div class="dashboard-grid">
+                    <!-- Card 1 -->
                     <div class="action-card">
-                        <h2>Make an Offer</h2>
-                        <p>Submit a formal intent to purchase. Priority processing for Tim's clients.</p>
-                        <a href="mailto:tim.chong@kw.com?subject=Offer Request" class="btn-primary">Draft My Offer</a>
+                        <div>
+                            <h2>Make an Offer</h2>
+                            <p>Ready to secure a property? Connect with Tim immediately to start the offer process.</p>
+                        </div>
+                        <div class="action-btn-group">
+                            <a href="tel:+14084599777" class="btn-primary">Call Tim Now</a>
+                            <a href="sms:+14084599777?body=Hi Tim, I'm interested in making an offer on a home." class="btn-secondary">Text Offer Request</a>
+                        </div>
                     </div>
+                    <!-- Card 2 -->
                     <div class="action-card">
-                        <h2>Private Tour</h2>
-                        <p>Schedule a walkthrough of any property in the Bay Area at your convenience.</p>
-                        <a href="mailto:tim.chong@kw.com?subject=Schedule Viewing" class="btn-primary">Book Tour</a>
+                        <div>
+                            <h2>Private Tour</h2>
+                            <p>Found a home you love? Schedule a private walkthrough or virtual tour at your convenience.</p>
+                        </div>
+                        <div class="action-btn-group">
+                            <a href="sms:+14084599777?body=Hi Tim, I'd like to schedule a tour for a property I found." class="btn-primary">Text to Schedule</a>
+                            <a href="tel:+14084599777" class="btn-secondary">Call to Book</a>
+                        </div>
                     </div>
+                    <!-- Card 3 -->
                     <div class="action-card">
-                        <h2>List My Home</h2>
-                        <p>Get a custom marketing plan and white-glove concierge selling service.</p>
-                        <a href="mailto:tim.chong@kw.com?subject=Selling Consultation" class="btn-primary">Start Selling</a>
+                        <div>
+                            <h2>List My Home</h2>
+                            <p>Thinking of selling? Get an expert market analysis and custom concierge strategy.</p>
+                        </div>
+                        <div class="action-btn-group">
+                            <a href="tel:+14084599777" class="btn-primary">Call for Valuation</a>
+                            <a href="mailto:tim.chong@kw.com?subject=Selling Consultation" class="btn-secondary">Email Consultation</a>
+                        </div>
                     </div>
                 </div>
             </div>
