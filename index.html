@@ -105,7 +105,6 @@
     @keyframes spin {
         to { transform: rotate(360deg); }
     }
-    /* Action Center Styles */
     .dashboard-view {
         padding: 3rem 1.5rem;
         background: var(--bg-elevated);
@@ -199,7 +198,6 @@
                 <div class="spinner"></div>
                 <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">Accessing Real-Time Data...</p>
             </div>
-
             <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports" onload="hideLoader()"></iframe>
             <div id="actions-view" class="dashboard-view hidden">
                 <div class="dashboard-header">
@@ -233,13 +231,17 @@
     <script>
     const pages = {
         valuation: "https://timchong.realscout.com/homesearch/home-reports",
-        search: "https://timchong.realscout.com/homesearch/map",
-        insights: "https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202"
+        search: "https://timchong.realscout.com/homesearch/map"
     };
     function loadPage(page, btn) {
         const frame = document.getElementById('main-frame');
         const actionsView = document.getElementById('actions-view');
         const loader = document.getElementById('loader');
+
+        if (page === 'insights') {
+            window.open('https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202', '_blank');
+            return;
+        }
 
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
