@@ -1,432 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Tim Chong Realtor | Silicon Valley Real Estate Portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tim Chong | Silicon Valley Real Estate Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-    :root {
-        --bg-main: #020617;
-        --bg-elevated: #0f172a;
-        --accent: #f59e0b;
-        --accent-glow: rgba(245, 158, 11, 0.4);
-        --text-main: #f8fafc;
-        --text-muted: #94a3b8;
-        --border-glass: rgba(255, 255, 255, 0.1);
-        --glass: rgba(15, 23, 42, 0.8);
-    }
+        :root {
+            --accent: #d4af37; /* Luxe Gold */
+            --accent-glow: rgba(212, 175, 55, 0.4);
+            --bg: #020617;
+            --glass: rgba(15, 23, 42, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-    body {
-        margin: 0;
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        background: var(--bg-main);
-        color: var(--text-main);
-        overflow-x: hidden;
-        min-height: 100vh;
-    }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .app-container {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        width: 100vw;
-        position: relative;
-    }
+        /* High-End Dynamic Background */
+        .bg-fixed {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2560&q=80') center/cover no-repeat;
+            z-index: -2;
+            transition: filter 0.5s ease;
+        }
 
-    /* Modern Glass Nav */
-    .nav {
-        background: rgba(2, 6, 23, 0.9);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border-glass);
-        padding: 0.75rem 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(2, 6, 23, 0.5) 0%, rgba(2, 6, 23, 0.95) 100%);
+            z-index: -1;
+        }
 
-    .logo {
-        font-weight: 800;
-        letter-spacing: -0.025em;
-        color: #fff;
-        text-decoration: none;
-        font-size: 1.1rem;
-        flex-shrink: 0;
-    }
+        .app-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: clamp(10px, 3vw, 24px);
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
 
-    .logo span {
-        color: var(--accent);
-        background: linear-gradient(to right, #f59e0b, #fbbf24);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: clamp(10px, 4vw, 30px);
+        }
 
-    .nav-links {
-        display: flex;
-        gap: 0.25rem;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 0.2rem;
-        border-radius: 9999px;
-        border: 1px solid var(--border-glass);
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-    .nav-links::-webkit-scrollbar { display: none; }
+        .logo {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .nav-btn {
-        background: transparent;
-        border: none;
-        color: var(--text-muted);
-        padding: 0.4rem 0.75rem;
-        border-radius: 9999px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        white-space: nowrap;
-    }
+        .logo h1 {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .nav-btn.active {
-        background: var(--accent);
-        color: #000;
-    }
+        .logo span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: -4px;
+        }
 
-    .viewport {
-        flex-grow: 1;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-    }
+        .nav-pills {
+            display: flex;
+            gap: 8px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 6px;
+            border-radius: 60px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+        }
 
-    /* Hero Redesign */
-    .hero-view {
-        flex-grow: 1;
-        background: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.9)), 
-                    url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000');
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 4rem 1.5rem;
-        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 12px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
 
-    .hero-content {
-        max-width: 1000px;
-        width: 100%;
-    }
+        .nav-btn.active {
+            background: var(--accent);
+            color: #020617;
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
 
-    .hero-content h1 {
-        font-size: clamp(2.25rem, 10vw, 4.5rem);
-        font-weight: 900;
-        line-height: 1.1;
-        margin-bottom: 1rem;
-        letter-spacing: -0.05em;
-    }
+        .nav-btn:hover:not(.active) {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
 
-    .hero-content p {
-        font-size: clamp(1rem, 4vw, 1.25rem);
-        color: var(--text-muted);
-        margin-bottom: 3rem;
-        max-width: 600px;
-        margin-inline: auto;
-    }
+        /* Dashboard View */
+        .portal-stage {
+            flex: 1;
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+        }
 
-    .hero-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1rem;
-        width: 100%;
-        max-width: 1100px;
-        margin: 0 auto;
-    }
+        #hero {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            z-index: 10;
+            transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            text-align: center;
+        }
 
-    .hero-card {
-        background: var(--glass);
-        backdrop-filter: blur(16px);
-        border: 1px solid var(--border-glass);
-        padding: 1.5rem;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-align: left;
-    }
+        #hero.stashed {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
 
-    .hero-card:hover {
-        border-color: var(--accent);
-        transform: translateY(-5px);
-        background: rgba(15, 23, 42, 0.9);
-    }
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
 
-    .hero-card h3 {
-        margin: 0 0 0.5rem 0;
-        font-size: 1.1rem;
-        color: var(--accent);
-    }
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 50px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
 
-    .hero-card p {
-        margin: 0;
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        line-height: 1.4;
-    }
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            width: 100%;
+            max-width: 1000px;
+        }
 
-    iframe {
-        width: 100%;
-        height: calc(100vh - 60px);
-        border: none;
-        display: none;
-    }
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 40px 30px;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .loader {
-        position: fixed;
-        inset: 60px 0 0 0;
-        background: var(--bg-main);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 50;
-    }
+        .card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.4);
+        }
 
-    .spinner {
-        width: 40px;
-        height: 40px;
-        border: 3px solid var(--accent-glow);
-        border-top-color: var(--accent);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-    }
+        .card .icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 2rem;
+            color: var(--accent);
+            transition: transform 0.4s ease;
+        }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+        .card:hover .icon { transform: scale(1.1) rotate(5deg); }
 
-    .footer {
-        background: var(--bg-main);
-        border-top: 1px solid var(--border-glass);
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: center;
-        text-align: center;
-        font-size: 0.7rem;
-        color: var(--text-muted);
-    }
+        .card h3 { margin: 0 0 12px 0; font-size: 1.25rem; font-weight: 700; }
+        .card p { margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
 
-    .hidden { display: none !important; }
-    .slide-up { display: none !important; }
+        /* Frame & Loader */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+            background: #fff;
+        }
 
-    /* Client Actions Dashboard */
-    .dashboard {
-        padding: 3rem 1.5rem;
-        background: var(--bg-elevated);
-        min-height: calc(100vh - 60px);
-    }
+        .loader {
+            position: absolute;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg);
+            z-index: 5;
+        }
 
-    .dashboard-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(212, 175, 55, 0.1);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
+        }
 
-    .action-card {
-        background: var(--bg-main);
-        border: 1px solid var(--border-glass);
-        padding: 2rem;
-        border-radius: 24px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    .action-btn-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        margin-top: 2rem;
-    }
+        footer {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #475569;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            margin-top: 10px;
+        }
 
-    .btn-primary {
-        background: var(--accent);
-        color: #000;
-        padding: 0.85rem 1.5rem;
-        border-radius: 9999px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.2s;
-    }
+        .badge {
+            display: flex;
+            gap: 15px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #64748b;
+        }
 
-    .btn-secondary {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--border-glass);
-        color: #fff;
-        padding: 0.85rem 1.5rem;
-        border-radius: 9999px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s;
-    }
-
-    /* Desktop Specific Adjustments */
-    @media (min-width: 768px) {
-        .nav { padding: 0.75rem 2rem; }
-        .logo { font-size: 1.25rem; }
-        .nav-btn { font-size: 0.85rem; padding: 0.5rem 1.25rem; }
-        .footer { flex-direction: row; justify-content: space-between; padding: 1rem 2rem; }
-        .hero-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
+        @media (max-width: 900px) {
+            .action-grid { grid-template-columns: 1fr; gap: 16px; }
+            .hero-title { font-size: 2.5rem; }
+            .nav-pills { overflow-x: auto; max-width: 90vw; }
+            .nav-btn { padding: 10px 20px; }
+            footer { flex-direction: column; gap: 10px; text-align: center; }
+            .logo { align-items: center; }
+        }
     </style>
 </head>
 <body>
+    <div class="bg-fixed"></div>
+    <div class="bg-overlay"></div>
+
     <div class="app-container">
-        <nav class="nav">
-            <a href="#" class="logo" onclick="goHome()">TIM CHONG <span>REALTOR</span></a>
-            <div class="nav-links">
-                <button class="nav-btn" onclick="loadPage('valuation', this)">Valuation</button>
+        <header>
+            <div class="logo" onclick="goHome()">
+                <h1>Tim Chong</h1>
+                <span>Silicon Valley Specialist</span>
+            </div>
+            <nav class="nav-pills">
+                <button class="nav-btn" onclick="loadPage('valuation', this)">Home Valuation</button>
                 <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
-                <button class="nav-btn" onclick="loadPage('actions', this)">Client Portal</button>
-                <button class="nav-btn" onclick="openAltos()">Market Data</button>
-            </div>
-        </nav>
+                <button class="nav-btn" onclick="loadPage('market', this)">Market Insights</button>
+            </nav>
+        </header>
 
-        <main class="viewport">
-            <!-- Hero Landing -->
-            <div id="hero" class="hero-view">
-                <div class="hero-content">
-                    <h1>Silicon Valley <span>Real Estate</span> Redefined.</h1>
-                    <p>Access institutional-grade market data and premium property search tools in one seamless dashboard.</p>
-                    
-                    <div class="hero-grid">
-                        <div class="hero-card" onclick="loadPage('valuation', document.querySelectorAll('.nav-btn')[0])">
-                            <h3>Home Value</h3>
-                            <p>Get a precise AI-driven valuation of your property instantly.</p>
-                        </div>
-                        <div class="hero-card" onclick="loadPage('search', document.querySelectorAll('.nav-btn')[1])">
-                            <h3>Pro Search</h3>
-                            <p>Direct MLS access with real-time Silicon Valley inventory.</p>
-                        </div>
-                        <div class="hero-card" onclick="openAltos()">
-                            <h3>Market Insights</h3>
-                            <p>Live tracking for Palo Alto & luxury market trends.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <main class="portal-stage">
             <div id="loader" class="loader"><div class="spinner"></div></div>
             
-            <iframe id="main-frame" src=""></iframe>
+            <section id="hero">
+                <h2 class="hero-title">Intelligent<br><span style="color:var(--accent)">Real Estate.</span></h2>
+                <p class="hero-subtitle">Next-generation tools for the Silicon Valley market. Monitor your home value, search active listings, and analyze real-time trends.</p>
+                
+                <div class="action-grid">
+                    <div class="card" onclick="loadPage('valuation')">
+                        <div class="icon">📈</div>
+                        <h3>Home Reports</h3>
+                        <p>Receive a comprehensive, data-driven valuation of your Silicon Valley property.</p>
+                    </div>
+                    <div class="card" onclick="loadPage('search')">
+                        <div class="icon">🔍</div>
+                        <h3>MLS Search</h3>
+                        <p>Browse exclusive listings with premium filters and real-time inventory updates.</p>
+                    </div>
+                    <div class="card" onclick="loadPage('market')">
+                        <div class="icon">📊</div>
+                        <h3>Market Insights</h3>
+                        <p>Analyze the latest market statistics and inventory cycles in your specific zip code.</p>
+                    </div>
+                </div>
+            </section>
 
-            <div id="dashboard" class="dashboard hidden">
-                <div style="text-align:center; margin-bottom: 3rem;">
-                    <h2 style="font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 0.5rem;">Client Portal</h2>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Concierge service for Silicon Valley clients.</p>
-                </div>
-                <div class="dashboard-grid">
-                    <div class="action-card">
-                        <div>
-                            <h3>Make an Offer</h3>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Ready to secure a property? Connect with Tim immediately.</p>
-                        </div>
-                        <div class="action-btn-group">
-                            <a href="tel:+14084599777" class="btn-primary">Call Tim Now</a>
-                            <a href="sms:+14084599777?body=Hi Tim, I'm interested in making an offer on a home." class="btn-secondary">Text Offer Request</a>
-                        </div>
-                    </div>
-                    <div class="action-card">
-                        <div>
-                            <h3>Private Tour</h3>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Schedule a walkthrough of any property at your convenience.</p>
-                        </div>
-                        <div class="action-btn-group">
-                            <a href="sms:+14084599777?body=Hi Tim, I'd like to schedule a tour for a property I found." class="btn-primary">Text to Schedule</a>
-                            <a href="tel:+14084599777" class="btn-secondary">Call to Book</a>
-                        </div>
-                    </div>
-                    <div class="action-card">
-                        <div>
-                            <h3>List My Home</h3>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Get an expert market analysis and custom concierge strategy.</p>
-                        </div>
-                        <div class="action-btn-group">
-                            <a href="tel:+14084599777" class="btn-primary">Call for Valuation</a>
-                            <a href="mailto:tim.chong@kw.com?subject=Selling Consultation" class="btn-secondary">Email Consultation</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <iframe id="main-frame" src="" title="Real Estate Tools"></iframe>
         </main>
 
-        <footer class="footer">
-            <div>&copy; 2026 Tim Chong | KW Bay Area Estates | DRE# 02044620</div>
-            <div style="opacity: 0.8; font-weight: 600;">POWERED BY ALTOS & REALSCOUT</div>
+        <footer>
+            <div>© 2026 Tim Chong • KW Bay Area Estates • DRE# 02044620</div>
+            <div class="badge">
+                <span>REALSCOUT</span>
+                <span>ALTOS</span>
+            </div>
         </footer>
     </div>
 
     <script>
-    const pages = {
-        valuation: "https://timchong.realscout.com/homesearch/home-reports",
-        search: "https://timchong.realscout.com/homesearch/map"
-    };
+        const tools = {
+            valuation: "https://timchong.realscout.com/homesearch/home-reports",
+            search: "https://timchong.realscout.com/homesearch/map",
+            market: "https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202"
+        };
 
-    function loadPage(page, btn) {
-        const hero = document.getElementById('hero');
-        const frame = document.getElementById('main-frame');
-        const dash = document.getElementById('dashboard');
-        const loader = document.getElementById('loader');
+        function loadPage(id, btn) {
+            const hero = document.getElementById('hero');
+            const frame = document.getElementById('main-frame');
+            const loader = document.getElementById('loader');
+            const bg = document.querySelector('.bg-fixed');
+            
+            // Sync Navigation State
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+            else {
+                const map = { valuation: 0, search: 1, market: 2 };
+                document.querySelectorAll('.nav-btn')[map[id]].classList.add('active');
+            }
 
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        if(btn) btn.classList.add('active');
-
-        hero.classList.add('slide-up');
-
-        if (page === 'actions') {
-            frame.style.display = 'none';
-            dash.classList.remove('hidden');
-            loader.style.display = 'none';
-        } else {
-            dash.classList.add('hidden');
-            frame.style.display = 'block';
+            // Visual Transitions
+            hero.classList.add('stashed');
             loader.style.display = 'flex';
-            frame.src = pages[page];
-            frame.onload = () => loader.style.display = 'none';
+            bg.style.filter = 'brightness(0.2) blur(5px)';
+            
+            // Load Content
+            frame.style.display = 'block';
+            frame.src = tools[id];
+
+            frame.onload = () => {
+                loader.style.display = 'none';
+            };
         }
-    }
 
-    function goHome() {
-        const hero = document.getElementById('hero');
-        const frame = document.getElementById('main-frame');
-        const dash = document.getElementById('dashboard');
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        
-        hero.classList.remove('slide-up');
-        frame.style.display = 'none';
-        dash.classList.add('hidden');
-    }
-
-    function openAltos() {
-        window.open('https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202', '_blank');
-    }
+        function goHome() {
+            const hero = document.getElementById('hero');
+            const frame = document.getElementById('main-frame');
+            const bg = document.querySelector('.bg-fixed');
+            
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            hero.classList.remove('stashed');
+            frame.style.display = 'none';
+            frame.src = "";
+            bg.style.filter = 'brightness(0.4) blur(0)';
+        }
     </script>
 </body>
 </html>
