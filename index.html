@@ -14,6 +14,7 @@
             --text-muted: #9ca3af;
             --border-subtle: rgba(148, 163, 184, 0.3);
             --radius-pill: 999px;
+            --radius-card: 16px;
         }
         body {
             margin: 0;
@@ -71,11 +72,16 @@
             flex-grow: 1;
             position: relative;
             background: #fff;
+            overflow-y: auto;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: block;
+        }
+        .hidden {
+            display: none !important;
         }
         .loading-overlay {
             position: absolute;
@@ -99,6 +105,74 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Action Center Styles */
+        .dashboard-view {
+            padding: 3rem 1.5rem;
+            background: var(--bg-elevated);
+            min-height: 100%;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .dashboard-header h1 {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            width: 100%;
+        }
+        .action-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .action-card h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .action-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .action-btn {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
         .footer {
             background: var(--bg-main);
             border-top: 1px solid var(--border-subtle);
@@ -114,10 +188,11 @@
 <body>
     <div class="app-container">
         <nav class="nav">
-            <a href="#" class="logo">TIM CHONG <span>REALTOR</span></a>
+            <a href="#" class="logo" onclick="loadPage('valuation', document.querySelector('.nav-btn'))">TIM CHONG <span>REALTOR</span></a>
             <div class="nav-links">
                 <button class="nav-btn active" onclick="loadPage('valuation', this)">Home Valuation</button>
                 <button class="nav-btn" onclick="loadPage('search', this)">MLS Search</button>
+                <button class="nav-btn" onclick="loadPage('actions', this)">Client Actions</button>
                 <a href="https://altos.re/r/f1aaa1e3-5c5f-43c1-b305-f93564455202" class="nav-btn">Market Insights</a>
             </div>
         </nav>
@@ -126,7 +201,32 @@
                 <div class="spinner"></div>
                 <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">Accessing Real-Time Data...</p>
             </div>
+            
             <iframe id="main-frame" src="https://timchong.realscout.com/homesearch/home-reports" onload="hideLoader()"></iframe>
+
+            <div id="actions-view" class="dashboard-view hidden">
+                <div class="dashboard-header">
+                    <h1>Real Estate Action Center</h1>
+                    <p style="color: var(--text-muted);">Streamlined solutions for Silicon Valley buyers and sellers.</p>
+                </div>
+                <div class="actions-grid">
+                    <div class="action-card">
+                        <h3>Make an Offer Now</h3>
+                        <p>Ready to secure your dream home? Submit a formal offer request directly to Tim Chong for immediate processing.</p>
+                        <a href="mailto:tim.chong@kw.com?subject=Offer Request" class="action-btn">Draft My Offer</a>
+                    </div>
+                    <div class="action-card">
+                        <h3>View a Home</h3>
+                        <p>Found a property you love? Schedule a private walkthrough or virtual tour at your convenience.</p>
+                        <a href="mailto:tim.chong@kw.com?subject=Schedule Viewing" class="action-btn">Schedule Tour</a>
+                    </div>
+                    <div class="action-card">
+                        <h3>Sell My Home Now</h3>
+                        <p>Thinking of moving? Get an expert market analysis and custom marketing strategy to sell for top dollar.</p>
+                        <a href="mailto:tim.chong@kw.com?subject=Selling Consultation" class="action-btn">Start Selling</a>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer class="footer">
             <div>© 2026 Tim Chong | Keller Williams Peninsula Estates | DRE# 02244508</div>
@@ -140,12 +240,23 @@
         };
         function loadPage(page, btn) {
             const frame = document.getElementById('main-frame');
+            const actionsView = document.getElementById('actions-view');
             const loader = document.getElementById('loader');
+            
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            loader.style.display = 'flex';
-            loader.style.opacity = '1';
-            frame.src = pages[page];
+
+            if (page === 'actions') {
+                frame.classList.add('hidden');
+                actionsView.classList.remove('hidden');
+                loader.style.display = 'none';
+            } else {
+                actionsView.classList.add('hidden');
+                frame.classList.remove('hidden');
+                loader.style.display = 'flex';
+                loader.style.opacity = '1';
+                frame.src = pages[page];
+            }
         }
         function hideLoader() {
             const loader = document.getElementById('loader');
